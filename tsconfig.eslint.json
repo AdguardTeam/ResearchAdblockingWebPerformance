@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "include": [
+        "tests/",
+        "src/",
+        ".eslintrc.js",
+        "jest.config.ts",
+        "jest.setup.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "tmp",
+        "src/extension",
+        "src/adguard-dns",
+        "dist/metrics"
+    ]
+}

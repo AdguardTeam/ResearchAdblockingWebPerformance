@@ -1,0 +1,49 @@
+{
+    "name": "research-adblocking-web-performance",
+    "version": "1.0.0",
+    "author": "Maxim Topciu (maximtop@gmail.com)",
+    "license": "MIT",
+    "scripts": {
+        "lint": "eslint . && tsc --noEmit",
+        "test": "bun test"
+    },
+    "dependencies": {
+        "@adguard/tswebextension": "https://github.com/AdguardTeam/tsurlfilter/raw/b51d97b96632fef71c731569c3f37a6118a7da91/packages/tswebextension/tswebextension.tgz",
+        "bootstrap": "^5.3.3",
+        "commander": "^12.1.0",
+        "d3": "^7.9.0",
+        "date-fns": "^4.1.0",
+        "fs-extra": "^11.2.0",
+        "puppeteer": "23.8.0",
+        "puppeteer-har": "^1.1.2",
+        "react": "^19.0.0",
+        "react-bootstrap": "^2.10.9",
+        "react-dom": "^19.0.0",
+        "tldts": "^6.1.61",
+        "winston": "^3.17.0"
+    },
+    "devDependencies": {
+        "@jest/globals": "^29.7.0",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.2.0",
+        "@types/bun": "^1.1.10",
+        "@types/d3": "^7.4.3",
+        "@types/fs-extra": "^11.0.4",
+        "@types/jest": "^29.5.13",
+        "@types/puppeteer-har": "^1.1.0",
+        "@types/react-dom": "^19.0.2",
+        "@typescript-eslint/eslint-plugin": "^7.18.0",
+        "@typescript-eslint/parser": "^7.18.0",
+        "@typescript-eslint/typescript-estree": "^7.18.0",
+        "eslint": "^8.57.1",
+        "eslint-config-airbnb-base": "15",
+        "eslint-config-airbnb-typescript": "^18.0.0",
+        "eslint-plugin-import": "^2.30.0",
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "jsdom": "^26.0.0",
+        "ts-jest": "^29.2.5",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.2"
+    }
+}
