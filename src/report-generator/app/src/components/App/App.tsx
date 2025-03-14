@@ -34,6 +34,12 @@ export const App: React.FC = () => {
     // Get report data and cast directly to ReportResult
     const currentReport = selectedReport ? (reportResults[selectedReport] as unknown as ReportResult) : null;
 
+    // Find the baseline report to use for percentage comparisons
+    const baselineReportKey = reportKeys.find((key) => key.toLowerCase().includes('baseline'));
+    const baselineReport = baselineReportKey
+        ? (reportResults[baselineReportKey] as unknown as ReportResult)
+        : null;
+
     return (
         <div className="container mt-4">
             <h1 className="mb-4">Reports viewer</h1>
@@ -49,9 +55,15 @@ export const App: React.FC = () => {
                 <div className="row">
                     {reportKeys.map((reportKey) => {
                         const report = reportResults[reportKey] as unknown as ReportResult;
+                        const isBaselineReport = reportKey === baselineReportKey;
+
                         return (
                             <div className="col-md" key={reportKey}>
-                                <ReportMetrics selectedReport={reportKey} currentReport={report} />
+                                <ReportMetrics
+                                    selectedReport={reportKey}
+                                    currentReport={report}
+                                    baselineReport={!isBaselineReport && baselineReport ? baselineReport : undefined}
+                                />
                             </div>
                         );
                     })}

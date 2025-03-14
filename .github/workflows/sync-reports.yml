@@ -1,0 +1,32 @@
+name: Sync Reports to Docs
+
+on:
+  workflow_dispatch:  # Allow manual triggering
+  push:
+    paths:
+      - 'report/**'   # Trigger when report directory changes
+
+jobs:
+  sync-reports:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run report syncing script
+        run: node .github/scripts/sync-reports.js
+
+      - name: Auto Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update reports and index.html"
+          file_pattern: "docs/*"
