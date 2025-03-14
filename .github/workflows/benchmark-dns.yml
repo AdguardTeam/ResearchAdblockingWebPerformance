@@ -1,0 +1,38 @@
+name: Benchmark dns
+
+on:
+  workflow_dispatch:
+
+env:
+  ADGUARD_DNS_DOH_URL: ${{ secrets.ADGUARD_DNS_DOH_URL }}
+
+jobs:
+  run-script-and-commit:
+    runs-on: self-hosted
+    timeout-minutes: 1200
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build the Docker image
+        run: make docker-build
+
+      - name: Launch docker and script
+        run: |
+          docker run --rm \
+          --dns=127.0.0.1 \
+          -v ${{ github.workspace }}/dist:/app/dist \
+          maximtop/adblock-research:latest \
+          /bin/bash -c \
+          "dnsproxy -u https://dns.adguard-dns.com/dns-query -b 8.8.8.8 & sleep 5 \
+            && bun run src/cli.ts -e dns -v -f src/domains/combined_unique_news_domains.txt"
+
+      - name: Auto Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update metrics data from GitHub Action"
+          file_pattern: "dist/**/*.json dist/screenshots/*"
